@@ -64,9 +64,8 @@ class PlaylistController extends Controller
     public function update($id, Request $request)
     {
         $request->validate([
-            'name' => 'required|max:30'
+            'name' => 'required|max:30|unique:playlists,name'
         ]);
-
         $oldName = $request->input('oldName');
 
         DB::table('playlists')
