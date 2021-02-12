@@ -1,4 +1,34 @@
-[Go visit my heroku app](https://hern784-itp405.herokuapp.com/playlists)
+# [Go visit my heroku app](https://hern784-itp405.herokuapp.com/)
+
+
+### Assignment 3
+[Go visit my heroku app: assignment3](https://hern784-itp405.herokuapp.com/)
+
+**Added**
+1. /tracks
+    - displays table of tracks
+2. /tracks/new
+    - form to add tracks
+3. /playlists/{id}/edit
+    - form to edit a playlist
+4. /playlists/{id}/delete
+    - form to delete a playlist
+
+
+### Assignment 2
+
+[Go visit my heroku app: assignment2](https://hern784-itp405.herokuapp.com/playlists)
+
+**Added**
+1. /playlists
+    - displays all playlists from table
+2. /playlists/{id}
+    - displays: name, album, artist, genre
+
+### Assignment 1
+
+**note** same as assignment 2 but not on this project because this is all done using Larvel
+
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
