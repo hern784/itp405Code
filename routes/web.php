@@ -40,3 +40,7 @@ Route::post('/albums/{id}', [AlbumController::class, 'update'])->name('album.upd
 Route::get('/tracks', [TrackController::class, 'index'])->name('track.index');
 Route::get('/tracks/new', [TrackController::class, 'insert'])->name('track.insert');
 Route::post('/tracks', [TrackController::class, 'store'])->name('track.store');
+
+Route::fallback(function () {
+    return view('welcome');
+});
