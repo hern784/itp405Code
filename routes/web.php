@@ -5,6 +5,11 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\TrackController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
+
+if (env('APP_ENV') !== 'local') {
+    URL::forceScheme('https');
+}
 
 /*
 |--------------------------------------------------------------------------
