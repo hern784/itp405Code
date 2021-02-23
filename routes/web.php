@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\EalbumController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\TrackController;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\URL;
 use App\Models\Track;
 use App\Models\Artist;
 use App\Models\Album;
+use App\Models\Ealbum;
 use App\Models\Genre;
 
 if (env('APP_ENV') !== 'local') {
@@ -45,6 +47,13 @@ Route::get('/albums/create', [AlbumController::class, 'create'])->name('album.cr
 Route::post('/albums', [AlbumController::class, 'store'])->name('album.store');
 Route::get('/albums/{id}/edit', [AlbumController::class, 'edit'])->name('album.edit');
 Route::post('/albums/{id}', [AlbumController::class, 'update'])->name('album.update');
+
+// ASSIGNMENT 5  USING ELOQUENT
+Route::get('/ealbums', [EalbumController::class, 'index'])->name('ealbum.index');
+Route::get('/ealbums/create', [EalbumController::class, 'create'])->name('ealbum.create');
+Route::post('/ealbums', [EalbumController::class, 'store'])->name('ealbum.store');
+Route::get('/ealbums/{id}/edit', [EalbumController::class, 'edit'])->name('ealbum.edit');
+Route::post('/ealbums/{id}', [EalbumController::class, 'update'])->name('ealbum.update');
 
 Route::get('/tracks', [TrackController::class, 'index'])->name('track.index');
 Route::get('/tracks/new', [TrackController::class, 'insert'])->name('track.insert');
@@ -93,19 +102,17 @@ Route::get('/eloquent', function () {
     // return Genre::find(3)->tracks; // 3 = Metal
 
     // EAGER LOADING
-    /*
-     *return view('eloquent.eager-loading', [
-     *    //'tracks' => Track::where('unit_price', '>', 0.99)
-     *    //->orderBy('name')
-     *    //->limit(5)
-     *    //->get()
-     *    'tracks' => Track::with(['genre', 'album'])
-     *        ->where('unit_price', '>', 0.99)
-     *        ->orderBy('name')
-     *        ->limit(5)
-     *        ->get()
-     *]);
-     */
+    return view('eloquent.eager-loading', [
+        //'tracks' => Track::where('unit_price', '>', 0.99)
+        //->orderBy('name')
+        //->limit(5)
+        //->get()
+        'tracks' => Track::with(['genre', 'album'])
+            ->where('unit_price', '>', 0.99)
+            ->orderBy('name')
+            ->limit(5)
+            ->get()
+    ]);
 
     return view('eloquent');
 });

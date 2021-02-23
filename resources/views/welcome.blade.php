@@ -31,6 +31,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('ealbum.index') }}">
+                            Albums (Eloquent)
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('invoice.index') }}">
                             Invoices
                         </a>
@@ -38,6 +43,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('playlist.index') }}">
                             Playlist
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/eloquent">
+                            Eloquent
                         </a>
                     </li>
                 </ul>

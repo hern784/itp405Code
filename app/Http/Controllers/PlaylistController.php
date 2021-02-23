@@ -106,15 +106,3 @@ class PlaylistController extends Controller
             ->with('success', "The {$request->input('name')} playlist was successfully deleted");
     }
 }
-
-
-
-
-/*
- *
- *
- *ended trying to execute query to load tracks according to playlist
- *
- *
- *
- * */

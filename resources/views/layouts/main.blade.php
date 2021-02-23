@@ -25,6 +25,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('ealbum.index') }}">
+                            Albums (Eloquent)
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('invoice.index') }}">
                             Invoices
                         </a>
