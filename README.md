@@ -1,5 +1,17 @@
 # [Go visit my heroku app](https://hern784-itp405.herokuapp.com/)
 
+### Assignment 4
+[Go visit my heroku app: assignment4](https://hern784-itp405.herokuapp.com/)
+
+**Added**
+1. /ealbums
+2. /ealbums/create
+3. /ealbums
+4. /ealbums/{id}/edit
+5. /ealbums/{id}
+
+* These endpoints are the same as their related album ones but
+* created using eloquent and models
 
 ### Assignment 3
 [Go visit my heroku app: assignment3](https://hern784-itp405.herokuapp.com/)
