@@ -6,6 +6,10 @@ use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\TrackController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
+use App\Models\Track;
+use App\Models\Artist;
+use App\Models\Album;
+use App\Models\Genre;
 
 if (env('APP_ENV') !== 'local') {
     URL::forceScheme('https');
@@ -45,6 +49,66 @@ Route::post('/albums/{id}', [AlbumController::class, 'update'])->name('album.upd
 Route::get('/tracks', [TrackController::class, 'index'])->name('track.index');
 Route::get('/tracks/new', [TrackController::class, 'insert'])->name('track.insert');
 Route::post('/tracks', [TrackController::class, 'store'])->name('track.store');
+
+
+Route::get('/eloquent', function () {
+    // QUERYING
+    // return Artist::all();
+    // return Track::all();
+    // return Artist::orderBy('name', 'desc')->get();
+    // return Track::where('unit_price', '>', 0.99)->orderBy('name')->get();
+    // return Artist::find(3);
+
+    // CREATING
+    // $genre = new Genre();
+    // $genre->name = 'Hip Hop';
+    // $genre->save();
+    // return Genre::all();
+
+    // DELETING
+    // Genre::where('name', '=', 'Hip Hop')->delete();
+    // return Genre::all();
+
+    // UPDATING
+    // $genre = Genre::where('name', '=', 'Alternative & Punk')->first();
+    // $genre->name = 'Alternative and Punk';
+    // $genre->save();
+    // return Genre::all();
+
+    // RELATIONSHIPS (ONE TO MANY)
+    //return view('eloquent.one-to-many', [
+    //'artist' => Artist::find(50),
+    //]);
+
+    //return view('eloquent.belongs-to', [
+    //'album' => Album::find(152),
+    //]);
+
+    // return Artist::find(50); // 50 = Metallica
+    // return Artist::find(50)->albums;
+    // return Album::find(152)->artist; // 152 = Master of Puppets
+
+    // return Track::find(1837); // 1837 = Seek and Destroy
+    // return Track::find(1837)->genre;
+    // return Genre::find(3)->tracks; // 3 = Metal
+
+    // EAGER LOADING
+    /*
+     *return view('eloquent.eager-loading', [
+     *    //'tracks' => Track::where('unit_price', '>', 0.99)
+     *    //->orderBy('name')
+     *    //->limit(5)
+     *    //->get()
+     *    'tracks' => Track::with(['genre', 'album'])
+     *        ->where('unit_price', '>', 0.99)
+     *        ->orderBy('name')
+     *        ->limit(5)
+     *        ->get()
+     *]);
+     */
+
+    return view('eloquent');
+});
 
 Route::fallback(function () {
     return view('welcome');
