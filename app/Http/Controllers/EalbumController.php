@@ -13,8 +13,9 @@ class EalbumController extends Controller
     public function index()
     {
         return view('ealbum.index', [
-            'albums' => Ealbum::with(['artist'])
-                ->orderBy('artist_id', 'asc')
+            'albums' => Ealbum::with((['artist']))
+                ->join('artists', 'artists.id', '=', 'albums.artist_id')
+                ->orderBy('name', 'asc')
                 ->orderBy('title', 'asc')
                 ->get()
         ]);
