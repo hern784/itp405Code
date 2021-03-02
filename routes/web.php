@@ -5,6 +5,10 @@ use App\Http\Controllers\EalbumController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\TrackController;
+use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AuthController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use App\Models\Track;
@@ -12,10 +16,6 @@ use App\Models\Artist;
 use App\Models\Album;
 use App\Models\Ealbum;
 use App\Models\Genre;
-
-if (env('APP_ENV') !== 'local') {
-    URL::forceScheme('https');
-}
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ if (env('APP_ENV') !== 'local') {
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.main');
 });
 
 Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoice.index');
@@ -117,6 +117,26 @@ Route::get('/eloquent', function () {
     return view('eloquent');
 });
 
-Route::fallback(function () {
-    return view('welcome');
+Route::get('/register', [RegistrationController::class, 'index'])->name('registration.index');
+Route::post('/register', [RegistrationController::class, 'register'])->name('registration.create');
+
+Route::get('/login', [AuthController::class, 'loginForm'])->name('auth.loginForm');
+Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+
+Route::middleware(['custom-auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
+
+
+/*
+ *Route::fallback(function () {
+ *    return view('welcome');
+ *});
+ */
+
+
+
+if (env('APP_ENV') !== 'local') {
+    URL::forceScheme('https');
+}

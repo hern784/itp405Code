@@ -10,47 +10,12 @@
 </head>
 
 <body>
+
+    test
     <div class="container mt-3 mb-3">
-        <div class="row" >
-            <h2 style="float: left">ITP 405</h2>
-            <h3 style="float: left">Spring 2021</h3>
-            <h6 style="float: left">Richard Hernandez</h6>
-            <h6 style="float: right">hern784@usc.edu</h6>
-        </div>
         <div class="row">
             <div class="col-3">
                 <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">
-                            Home
-                        </a>
-                    </li>
-                    @if (Auth::check())
-                        <li class="nav-item">
-                            <a href="{{ route('profile.index') }}" class="nav-link">
-                                Profile
-                            </a>
-                        </li>
-                        <li>
-                            <form method="post" action="{{ route('auth.logout') }}">
-                                @csrf
-                                <button type="submit" class="btn btn-link">
-                                    Logout
-                                </button>
-                            </form>
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <a href="{{ route('registration.index') }}" class="nav-link">
-                                Register
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('auth.loginForm') }}" class="nav-link">
-                                Login
-                            </a>
-                        </li>
-                    @endif
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('track.index') }}">
                             Tracks
@@ -76,6 +41,24 @@
                             Playlist
                         </a>
                     </li>
+                    @if (Auth::check())
+                        <li class="nav-item">
+                            <a href="{{ route('profile.index') }}" class="nav-link">Profile</a>
+                        </li>
+                        <li>
+                            <form method="post" action="{{ route('auth.logout') }}">
+                                @csrf
+                                <button type="submit" class="btn btn-link">Logout</button>
+                            </form>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a href="{{ route('registration.index') }}" class="nav-link">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('auth.loginForm') }}" class="nav-link">Login</a>
+                        </li>
+                    @endif
 
                 </ul>
             </div>
