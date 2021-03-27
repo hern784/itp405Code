@@ -123,8 +123,21 @@ Route::post('/register', [RegistrationController::class, 'register'])->name('reg
 Route::get('/login', [AuthController::class, 'loginForm'])->name('auth.loginForm');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 
+/*
+ *Route::middleware(['custom-auth'])->group(function () {
+ *    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+ *    Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+ *});
+ */
+
+
 Route::middleware(['custom-auth'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::middleware(['not-blocked'])->group(function () {
+        Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
+        Route::get('/invoices/{id}', [InvoiceController::class, 'show'])->name('invoices.show');
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    });
+    Route::view('/blocked', 'blocked')->name('blocked');
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 

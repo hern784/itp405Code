@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\ProfileController;
 use App\Models\User;
+use App\Models\Role;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -23,6 +24,9 @@ class RegistrationController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password')); //bcrypt
+
+        $userRole = Role::getUser();
+        $user->role()->associate($userRole);
 
         $user->save();
 
