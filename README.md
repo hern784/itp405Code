@@ -6,6 +6,17 @@
 * Tracking album creators
 * Authorization for editing Albums
 
+### Assignment 6
+[Go visit my heroku app: assignment6](https://hern784-itp405.herokuapp.com/)
+
+**Added**
+1. /admin
+2. /maintenance
+ 
+* Create a configurations table
+* Maintenance mode middleware
+* Settings Page
+ 
 ### Assignment 5
 [Go visit my heroku app: assignment5](https://hern784-itp405.herokuapp.com/)
 
