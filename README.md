@@ -1,7 +1,7 @@
 # [Go visit my heroku app](https://hern784-itp405.herokuapp.com/)
 
 ### Assignment 7
-[Go visit my heroku app: assignment5](https://hern784-itp405.herokuapp.com/)
+[Go visit my heroku app: assignment7](https://hern784-itp405.herokuapp.com/)
 
 * Tracking album creators
 * Authorization for editing Albums
