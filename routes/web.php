@@ -32,15 +32,15 @@ use App\Models\Genre;
 |
 */
 
+
+if (env('APP_ENV') !== 'local') {
+    URL::forceScheme('https');
+}
+
 Route::get('/', function () {
     return view('layouts.main');
 });
 
-/*
- *Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoice.index');
- *Route::get('/invoices/{id}', [InvoiceController::class, 'show'])->name('invoice.show');
- *
- */
 Route::get('/mail', function () {
     Mail::raw('What is your favorite framework?', function ($message) {
         $message->to('hern784@usc.edu')->subject('hello richard');
@@ -57,10 +57,12 @@ Route::middleware(['maintenance'])->group(function () {
     Route::post('/playlists/{id}/delete', [PlaylistController::class, 'deleted'])->name('playlist.deleted');
 
     Route::get('/albums', [AlbumController::class, 'index'])->name('album.index');
-    Route::get('/albums/create', [AlbumController::class, 'create'])->name('album.create');
-    Route::post('/albums', [AlbumController::class, 'store'])->name('album.store');
-    Route::get('/albums/{id}/edit', [AlbumController::class, 'edit'])->name('album.edit');
-    Route::post('/albums/{id}', [AlbumController::class, 'update'])->name('album.update');
+    Route::middleware(['custom-auth'])->group(function () {
+        Route::get('/albums/create', [AlbumController::class, 'create'])->name('album.create');
+        Route::post('/albums', [AlbumController::class, 'store'])->name('album.store');
+        Route::get('/albums/{id}/edit', [AlbumController::class, 'edit'])->name('album.edit');
+        Route::post('/albums/{id}', [AlbumController::class, 'update'])->name('album.update');
+    });
 
     // ASSIGNMENT 5  USING ELOQUENT
     Route::get('/ealbums', [EalbumController::class, 'index'])->name('ealbum.index');
@@ -159,15 +161,3 @@ Route::middleware(['admin'])->group(function () {
 });
 
 Route::get('/maintenance', [ConfigurationController::class, 'maintenance'])->name('configuration.maintenance');
-
-/*
- *Route::fallback(function () {
- *    return view('welcome');
- *});
- */
-
-
-
-if (env('APP_ENV') !== 'local') {
-    URL::forceScheme('https');
-}

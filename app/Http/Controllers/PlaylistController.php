@@ -17,6 +17,7 @@ class PlaylistController extends Controller
                 'id',
                 'name'
             ]);
+
         return view('playlist.index', [
             'playlists' => $playlists
         ]);

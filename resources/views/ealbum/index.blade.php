@@ -4,12 +4,6 @@
 
 @section('content')
 
-    @if (session('success'))
-        <div class="alert alert-success" role="alert">
-            {{ session('success') }}
-        </div>
-    @endif
-
     <div class="text-end mb-3">
         <a href="{{ route('ealbum.create')}}">
             New Album

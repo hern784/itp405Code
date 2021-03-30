@@ -4,23 +4,20 @@
 
 @section('content')
 
-    @if (session('success'))
-        <div class="alert alert-success" role="alert">
-            {{ session('success') }}
+    @if ($can_create)
+        <div class="text-end mb-3">
+            <a href="{{ route('album.create')}}">
+                New Album
+            </a>
         </div>
     @endif
-
-    <div class="text-end mb-3">
-        <a href="{{ route('album.create')}}">
-            New Album
-        </a>
-    </div>
 
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Album</th>
             <th>Artist</th>
+            <th>Creator</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -31,12 +28,17 @@
                 {{$album->title}}
             </td>
             <td>
-                {{$album->artist}}
+                {{$album->artist->name}}
             </td>
             <td>
-                <a href="{{ route('album.edit', [ 'id' => $album->id ] ) }}">
-                    Edit
-                </a>
+                {{$album->user->name}}
+            </td>
+            <td>
+                @can ('view', $album)
+                    <a href="{{ route('album.edit', [ 'id' => $album->id ] ) }}">
+                        Edit
+                    </a>
+                @endcan
             </td>
         </tr>
         @endforeach

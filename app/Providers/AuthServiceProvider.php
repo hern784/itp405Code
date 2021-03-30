@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Models\Album;
 use App\Models\Invoice;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -29,6 +30,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('view-invoice', function (User $user, Invoice $invoice) {
             return $user->email === $invoice->customer->email;
+        });
+
+        Gate::define('edit-album', function (User $user, Album $album) {
+            return $user->id === $album->user_id;
         });
 
         // global auth 
