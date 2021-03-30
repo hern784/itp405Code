@@ -56,7 +56,10 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         // ADDED
         'custom-auth' => \App\Http\Middleware\CustomAuthentication::class,
-        'not-blocked' => \App\Http\Middleware\PreventBlockedUder::class,
+        'not-blocked' => \App\Http\Middleware\PreventBlockedUsers::class,
+        'maintenance' => \App\Http\Middleware\MaintenanceMode::class,
+        'admin' => \App\Http\Middleware\Admin::class,
+        // END ADDED
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,

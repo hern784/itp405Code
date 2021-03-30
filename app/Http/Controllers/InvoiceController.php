@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Invoice;
 
 class InvoiceController extends Controller
@@ -30,8 +32,16 @@ class InvoiceController extends Controller
 
         //$invoices = Invoice::all(); //SLOW because N+1 queries
 
+        $this->authorize('viewAny', Invoice::class);
+
         // NEW WAY USING ELOQUENT
-        $invoices = Invoice::with(['customer'])->get();
+        $invoices = Invoice::select('invoices.*')
+            ->with(['customer'])
+            ->join('customers', 'invoices.customer_id', '=', 'customers.id')
+            ->when(!Auth::user()->isAdmin(), function ($query) {
+                return $query->where('customers.email', '=', Auth::user()->email);
+            })
+            ->get();
 
         return view('invoice.index', [
             'invoices' => $invoices
@@ -65,6 +75,30 @@ class InvoiceController extends Controller
             'invoiceItems.track.album',
             'invoiceItems.track.album.artist',
         ])->find($id);
+
+        // all the same
+        /*
+         if (Gate::denies('view-invoice', $invoice)) {
+             abort(403);
+        }
+ 
+         if (!Gate::allows('view-invoice', $invoice)) {
+             abort(403);
+         }
+
+        if (!Auth::user()->can('view-invoice', $invoice)) {
+            abort(403);
+        }
+
+        if (Auth::user()->cannot('view-invoice', $invoice)) {
+            abort(403);
+        }
+
+        $this->authorize('view-invoice', $invoice);
+ */
+
+        // using InvoicePolicy to authorize
+        $this->authorize('view', $invoice);
 
         return view('invoice.show', [
             'invoice' => $invoice,

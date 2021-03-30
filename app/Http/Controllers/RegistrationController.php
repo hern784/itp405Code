@@ -20,7 +20,6 @@ class RegistrationController extends Controller
     public function register(Request $request)
     {
         $user = new User();
-
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password')); //bcrypt
@@ -31,7 +30,6 @@ class RegistrationController extends Controller
         $user->save();
 
         Auth::login($user);
-
-        return redirect('profile.index');
+        return redirect()->route('profile.index');
     }
 }
