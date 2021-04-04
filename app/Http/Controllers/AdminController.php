@@ -42,7 +42,7 @@ class AdminController extends Controller
         $artists = Artist::count();
         $playlists = Playlist::count();
         $minutes = intval(Track::sum('milliseconds') / 1000 / 60);
-        dispatch(new AnnounceUserStats());
+        dispatch(new AnnounceUserStats($artists, $playlists, $minutes));
         return view('email.user-stats-sent', [
             'artists' => $artists,
             'playlists' => $playlists,

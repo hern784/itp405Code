@@ -1,8 +1,11 @@
 @extends('layouts.email')
 
 @section('content')
-<h1>These are the stats</h1>
-<p>Total artists: {{$artists}}</p>
-<p>Total playlists: {{$playlists}}</p>
-<p>Total minutes: {{$minutes}}</p>
+    <div class="card">
+
+        <h1 class='card-title'>These are the stats</h1>
+        <p class='card-text'>Total artists: {{$artists}}</p>
+        <p class='card-text'>Total playlists: {{$playlists}}</p>
+        <p class='card-text'>Total minutes: {{$minutes}}</p>
+    </div>
 @endsection

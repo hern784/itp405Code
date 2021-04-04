@@ -21,15 +21,15 @@ use Exception;
 class AnnounceUserStats implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    public  $artists;
+    public  $playlists;
+    public  $minutes;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function __construct($artists, $playlists, $minutes)
     {
-        //
+        $this->artists = $artists;
+        $this->playlists = $playlists;
+        $this->minutes = $minutes;
     }
 
     /**
@@ -40,13 +40,9 @@ class AnnounceUserStats implements ShouldQueue
     public function handle()
     {
         $users = User::all();
-        $artists = Artist::count();
-        $playlists = Playlist::count();
-        $minutes = intval(Track::sum('milliseconds') / 1000 / 60);
-
         foreach ($users as $user) {
             if ($user->email) {
-                Mail::to($user->email)->send(new UserStats($artists, $playlists, $minutes));
+                Mail::to($user->email)->send(new UserStats($this->artists, $this->playlists, $this->minutes));
             } else {
                 throw new Exception("User {$user->id} is missing an email");
             }

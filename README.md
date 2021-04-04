@@ -1,5 +1,11 @@
 # [Go visit my heroku app](https://hern784-itp405.herokuapp.com/)
 
+### Assignment 8
+[Go visit my heroku app: assignment8](https://hern784-itp405.herokuapp.com/)
+
+* Added email stats to user button on /admin page
+* Send an email to all users with some stats
+
 ### Assignment 7
 [Go visit my heroku app: assignment7](https://hern784-itp405.herokuapp.com/)
 
