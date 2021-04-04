@@ -10,6 +10,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConfigurationController;
 use App\Http\Controllers\AdminController;
+use App\Jobs\AnnounceNewAlbum;
+use App\Mail\NewAlbum;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
@@ -42,9 +44,31 @@ Route::get('/', function () {
 });
 
 Route::get('/mail', function () {
-    Mail::raw('What is your favorite framework?', function ($message) {
-        $message->to('hern784@usc.edu')->subject('hello richard');
-    });
+    /*
+     *Mail::raw('What is your favorite framework?', function ($message) {
+     *    $message->to('hern784@usc.edu')->subject('Hello Richard');
+     *});
+     */
+
+    /*
+     *dispatch(function () {
+     *    $masterOfPuppets = Album::find(152);
+     *    Mail::to('hern784@usc.edu')->send(new NewAlbum($masterOfPuppets));
+     *});
+     */
+
+    /*
+     *$jaggedLittlePill = Album::find(6);
+     *Mail::to('hern784@usc.edu')->queue(new NewAlbum($jaggedLittlePill));
+     */
+
+    /*
+     *$jaggedLittlePill = Album::find(6);
+     *AnnounceNewAlbum::dispatch($jaggedLittlePill);
+     */
+
+    $jaggedLittlePill = Album::find(6);
+    dispatch(new AnnounceNewAlbum($jaggedLittlePill));
 });
 
 Route::middleware(['maintenance'])->group(function () {
@@ -158,6 +182,7 @@ Route::middleware(['custom-auth'])->group(function () {
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'maintenance'])->name('admin.maintenance');
     Route::post('/admin', [AdminController::class, 'update'])->name('admin.update');
+    Route::post('/stats', [AdminController::class, 'email_user_stats'])->name('admin.email_user_stats');
 });
 
 Route::get('/maintenance', [ConfigurationController::class, 'maintenance'])->name('configuration.maintenance');

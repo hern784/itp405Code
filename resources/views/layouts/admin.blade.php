@@ -14,4 +14,11 @@
         </button>
     </form>
 
+    <form action="/stats" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-primary">
+            Email Stats to Users
+        </button>
+    </form>
+
 @endsection
