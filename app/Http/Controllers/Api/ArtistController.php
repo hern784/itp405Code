@@ -18,6 +18,7 @@ class ArtistController extends Controller
     public function index(Request $request)
     {
         $q = $request->query('q');
+
         return !$q ?
             Artist::all() :
             Artist::query()->where('name', 'LIKE', "%{$q}%")->get();
@@ -35,14 +36,9 @@ class ArtistController extends Controller
             'name' => 'required',
         ]);
 
-        if ($validation->fails()) {
-            return response()->json([
-                'errors' => $validation->errors()
-
-            ], 422);
-        }
-
-        return Artist::create($request->all());
+        return !$validation->fails() ?
+            Artist::create($request->all()) :
+            response()->json(['errors' => $validation->errors()], 422);
     }
 
     /**
