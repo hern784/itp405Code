@@ -43,6 +43,8 @@ Route::get('/', function () {
     return view('layouts.main');
 });
 
+
+
 Route::get('/mail', function () {
     /*
      *Mail::raw('What is your favorite framework?', function ($message) {

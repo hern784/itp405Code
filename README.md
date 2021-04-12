@@ -1,5 +1,15 @@
 # [Go visit my heroku app](https://hern784-itp405.herokuapp.com/)
 
+### Assignment 9
+[Go visit my heroku app: assignment8](https://hern784-itp405.herokuapp.com/)
+
+* Added api to access Artists
+* endpoints:
+    1. /api/artists/?q=     (GET)->query artists, all or with query param
+    2. /api/artists/{id}    (GET)->query certain artist by id
+    3. /api/artists/        (POST)->create artist by name
+    4. /api/artists/{id}    (DELETE)->delete artist by id
+ 
 ### Assignment 8
 [Go visit my heroku app: assignment8](https://hern784-itp405.herokuapp.com/)
 
