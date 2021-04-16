@@ -24,12 +24,6 @@ class RegistrationController extends Controller
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password')); //bcrypt
 
-        $userRole = Role::getUser();
-        $user->role()->associate($userRole);
-
-        $user->save();
-
-        Auth::login($user);
-        return redirect()->route('profile.index');
+        print($user->password);
     }
 }
