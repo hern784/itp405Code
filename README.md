@@ -1,5 +1,14 @@
 # [Go visit my heroku app](https://hern784-itp405.herokuapp.com/)
 
+### Assignment 10
+
+* Endpoint using node.js
+* Endpoint is: /api/github/:username
+* run app:
+    * cd node
+    * npm init
+    * nodemon assignment10.js
+ 
 ### Assignment 9
 [Go visit my heroku app: assignment8](https://hern784-itp405.herokuapp.com/)
 
