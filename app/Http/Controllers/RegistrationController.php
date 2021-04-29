@@ -23,7 +23,8 @@ class RegistrationController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password')); //bcrypt
+        $user->save();
 
-        print($user->password);
+        return redirect()->route('profile.index');
     }
 }
